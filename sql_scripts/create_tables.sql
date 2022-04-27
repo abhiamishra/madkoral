@@ -3,14 +3,14 @@ create database themepark;
 use themepark;
 
 create table Department(
-	DeptID int,
+	DeptID int not null auto_increment,
     DeptType varchar(300),
     Supervisor varchar(300),
     primary key(DeptID)
 );
 
 create table Rides_Dept(
-	deptID int,
+	deptID int not null auto_increment,
     showID int,
     attractionName varchar(300),
     skill_lvl int,
@@ -18,26 +18,26 @@ create table Rides_Dept(
 );
 
 create table Security(
-	deptID int,
+	deptID int not null auto_increment,
     physicalIndex int,
     primary key(deptID)
 );
 
 create table Leisure(
-	deptID int,
+	deptID int not null auto_increment,
     hosp_index int,
     primary key(deptID)
 );
 
 create table Administration(
-	deptID int,
+	deptID int not null auto_increment,
     WPM int,
     primary key(deptID)
 );
 
 -- show is a reserved word -- renamed to shows
 create table Shows(
-	showID int,
+	showID int not null auto_increment,
     title varchar(150),
     park varchar(300),
     openHour int,
@@ -47,7 +47,7 @@ create table Shows(
 );
 
 create table Destination(
-	destID int,
+	destID int not null auto_increment,
     managerID varchar(300),
     destName varchar(300),
     destType varchar(300),
@@ -56,7 +56,7 @@ create table Destination(
 );
 
 create table Attraction(
-	attractionName varchar(300),
+	attractionName varchar(300) not null,
     duration int,
     passType varchar(50),
     rideType varchar(100),
@@ -66,11 +66,11 @@ create table Attraction(
 );
 
 create table Employee(
-	EMPID int,
-    SSN int,
+	EMPID int not null auto_increment,
+    SSN int not null,
     division varchar(50),
-    fname varchar(50),
-    lname varchar(50),
+    fname varchar(50) not null,
+    lname varchar(50) not null,
     type varchar(20),
     age int,
     phoneNo int,
@@ -80,23 +80,23 @@ create table Employee(
 );
 
 create table Guest(
-	GID int,
+	GID int not null auto_increment,
     credCard int,
     address varchar(100),
     passType varchar(50),
-    fname varchar(50),
-    lname varchar(50),
+    fname varchar(50) not null,
+    lname varchar(50) not null,
     age int,
     phoneNo int,
     primary key(GID)
 );
 
 create table Child(
-	CID int,
-    GID int,
+	CID int not null auto_increment,
+    GID int not null,
     relationship varchar(100),
-    fname varchar(50),
-    lname varchar(50),
+    fname varchar(50) not null,
+    lname varchar(50) not null,
     type varchar(20),
     age int,
     gender varchar(1),
