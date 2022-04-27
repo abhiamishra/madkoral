@@ -58,7 +58,7 @@ def generateAttraction(num_of_rows):
 
 # generateChild generates rows for the child table
 def generateChild(num_of_rows):
-    stmt = """INSERT INTO child (GID, relationship, fname, lname, type, age, gender) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    stmt = """INSERT INTO child (GID, relationship, fname, lname, age, gender) VALUES (%s, %s, %s, %s, %s, %s)"""
     tuples = []
     for i in range(num_of_rows):
         thisTuple = (
@@ -66,7 +66,6 @@ def generateChild(num_of_rows):
             static.relationshipTypes[random.randint(0,len(static.relationshipTypes)-1)],
             static.firstnames[random.randint(0,len(static.firstnames)-1)],
             static.lastnames[random.randint(0,len(static.lastnames)-1)],
-            "PLACEHOLDER - REMOVE",
             random.randint(1,18),
             static.gender[random.randint(0,len(static.gender)-1)]
         )
@@ -105,15 +104,14 @@ def generateDestination(num_of_rows):
 
 # generateEmployee generates rows for the employee table
 def generateEmployee(num_of_rows):
-    stmt = """INSERT INTO employee (SSN, division, fname, lname, type, age, phoneNo, hours, EmpDept) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    stmt = """INSERT INTO employee (SSN, fname, lname, type, age, phoneNo, hours, EmpDept) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
     tuples = []
     for i in range(num_of_rows):
         thisTuple = (
             random.randint(11111111,99999999),
-            "PLACEHOLDER - REMOVE",
             static.firstnames[random.randint(0,len(static.firstnames)-1)],
             static.lastnames[random.randint(0,len(static.lastnames)-1)],
-            "PLACEHOLDER - REMOVE",
+            static.empTypes[random.randint(0,len(static.empTypes)-1)],
             random.randint(18,60),
             random.randint(1111111111,9999999999),
             random.randint(3,8),

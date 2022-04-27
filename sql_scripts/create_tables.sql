@@ -1,3 +1,5 @@
+drop database if exists themepark;
+
 create database themepark;
 
 use themepark;
@@ -68,7 +70,6 @@ create table Attraction(
 create table Employee(
 	EMPID int not null auto_increment,
     SSN bigint not null,
-    division varchar(50),
     fname varchar(50) not null,
     lname varchar(50) not null,
     type varchar(20),
@@ -97,7 +98,6 @@ create table Child(
     relationship varchar(100),
     fname varchar(50) not null,
     lname varchar(50) not null,
-    type varchar(20),
     age int,
     gender varchar(1),
     primary key(CID,GID)
