@@ -166,6 +166,8 @@ destinationPrefix = [
     'Winter Crown'
 ]
 
+parkNames = ['Land', 'World', 'Park', 'Kingdom']
+
 destinationSuffix = [
     'Hotel',
     'Restroom',
