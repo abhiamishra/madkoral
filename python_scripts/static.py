@@ -195,3 +195,5 @@ addrA = [
 ]
 
 addrB = ['Street', 'Lane', 'Drive', 'Road', 'Court']
+
+empTypes = ['Janitor', 'Staff', 'Manager', 'Mascot']
