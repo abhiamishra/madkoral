@@ -196,7 +196,7 @@ def generateShows(num_of_rows):
     for i in range(num_of_rows):
         thisTuple = (
             static.addrA[random.randint(0,len(static.addrA)-1)]+' '+static.nouns[random.randint(0,len(static.nouns)-1)]+' '+static.verbs[random.randint(0,len(static.verbs)-1)],
-            "INSERT PARK NAME HERE",
+            static.destinationPrefix[random.randint(0,len(static.destinationPrefix)-1)]+' '+static.parkNames[random.randint(0,len(static.parkNames)-1)],
             random.randint(0,12),
             random.randint(13,24),
             random.randint(1,3)
