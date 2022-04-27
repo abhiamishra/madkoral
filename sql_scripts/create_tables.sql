@@ -1,3 +1,5 @@
+drop database if exists themepark;
+
 create database themepark;
 
 use themepark;

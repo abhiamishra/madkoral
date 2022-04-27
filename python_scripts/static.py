@@ -1,5 +1,7 @@
 passes = ['bronze', 'silver', 'gold', 'platinum']
 
+gender = ['m','f']
+
 rideTypes = ['merry-go-round', 'rollercoaster', 'funhouse', 'ferris-wheel', 'pendulum ride']
 
 relationshipTypes = ['son', 'daughter', 'grandson', 'granddaughter']
@@ -16,7 +18,28 @@ verbs = [
     'wrap',
     'import',
     'stem',
-    'focus'
+    'focus',
+    'running',
+    'walked',
+    'sell',
+    'marked',
+    'program',
+    'jump',
+    'throw',
+    'melt',
+    'whisper',
+    'laugh',
+    'emerge',
+    'ride',
+    'crawl',
+    'fight',
+    'read',
+    'climb',
+    'dance',
+    'fry',
+    'forgive',
+    'kneel',
+    'follow'
 ]
 
 nouns = [
@@ -29,7 +52,28 @@ nouns = [
     'magazine',
     'device',
     'republic',
-    'analysis'
+    'analysis',
+    'disease',
+    'covid',
+    'fruit',
+    'apple',
+    'color',
+    'air',
+    'teacher',
+    'student',
+    'debt',
+    'car',
+    'truck',
+    'bowl',
+    'rice',
+    'burger',
+    'taco',
+    'bullet',
+    'banana',
+    'coins',
+    'cards',
+    'letters',
+    'cotton'
 ]
 
 firstnames = [
@@ -45,7 +89,25 @@ firstnames = [
     'Saud',
     'Michael',
     'Jason',
-    'Arnav'
+    'Arnav',
+    'Ash',
+    'Brock',
+    'Misty',
+    'Jessie',
+    'James',
+    'Travis',
+    'Jake',
+    'Bob',
+    'Rob',
+    'Josh',
+    'Karen',
+    'April',
+    'Leo',
+    'Tim',
+    'Patrice',
+    'Eric',
+    'Eugene',
+    'Owen'
 ]
 
 lastnames = [
@@ -62,9 +124,25 @@ lastnames = [
     'Costello',
     'Yee',
     'Coatney'
+    'Thai',
+    'Vu',
+    'Wood',
+    'White',
+    'Black',
+    'Sullivan',
+    'Johnson',
+    'Davis',
+    'Lee',
+    'Moore',
+    'Lopez',
+    'Taylor',
+    'Thomas',
+    'Jones',
+    'Rodriguez',
+    'Miller',
+    'Perez'
+    'Martinez'
 ]
-
-gender = ['m','f']
 
 destinationPrefix = [
     'Noble Meadows',
@@ -77,7 +155,15 @@ destinationPrefix = [
     'Elegant',
     'Modest Brook',
     'Southern Renaissance',
-    'Royal Gem'
+    'Royal Gem',
+    'Malachite Market',
+    'Marina Baron',
+    'Crown Treasure',
+    'Nostalgia',
+    'Fantasy',
+    'Royal Court',
+    'Historic Pyramid',
+    'Winter Crown'
 ]
 
 destinationSuffix = [
@@ -100,7 +186,12 @@ addrA = [
     'Bird Spring',
     'Front',
     'School',
-    'Pick'
+    'Pick',
+    'Richland',
+    'Stark Hollow',
+    'Red Dog',
+    'Martha',
+    'Charmaine'
 ]
 
 addrB = ['Street', 'Lane', 'Drive', 'Road', 'Court']
