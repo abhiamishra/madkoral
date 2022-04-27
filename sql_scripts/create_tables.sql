@@ -62,6 +62,7 @@ create table Attraction(
     duration int,
     passType varchar(50),
     rideType varchar(100),
+    park varchar(300),
     openHour int,
     closeHour int,
     primary key(attractionName)

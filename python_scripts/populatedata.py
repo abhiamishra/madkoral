@@ -34,7 +34,7 @@ def generateAdministration(num_of_rows):
 
 # generateAttraction generates rows for the attraction table
 def generateAttraction(num_of_rows):
-    stmt = """INSERT INTO attraction (attractionName, duration, passType, rideType, openHour, closeHour) VALUES (%s, %s, %s, %s, %s, %s)"""
+    stmt = """INSERT INTO attraction (attractionName, duration, passType, rideType, park, openHour, closeHour) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
     tuples = []
     for i in range(num_of_rows):
         # choose a unique attraction name so PK won't throw error
@@ -49,6 +49,7 @@ def generateAttraction(num_of_rows):
             random.randint(4,15),
             static.passes[random.randint(0,len(static.passes)-1)],
             static.rideTypes[random.randint(0,len(static.rideTypes)-1)],
+            static.parkNames[random.randint(0,len(static.parkNames)-1)],
             random.randint(0,24),
             random.randint(0,24)
         )
@@ -196,7 +197,7 @@ def generateShows(num_of_rows):
     for i in range(num_of_rows):
         thisTuple = (
             static.addrA[random.randint(0,len(static.addrA)-1)]+' '+static.nouns[random.randint(0,len(static.nouns)-1)]+' '+static.verbs[random.randint(0,len(static.verbs)-1)],
-            static.destinationPrefix[random.randint(0,len(static.destinationPrefix)-1)]+' '+static.parkNames[random.randint(0,len(static.parkNames)-1)],
+            static.parkNames[random.randint(0,len(static.parkNames)-1)],
             random.randint(0,12),
             random.randint(13,24),
             random.randint(1,3)

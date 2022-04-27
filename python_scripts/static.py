@@ -166,7 +166,7 @@ destinationPrefix = [
     'Winter Crown'
 ]
 
-parkNames = ['Land', 'World', 'Park', 'Kingdom']
+parkNames = ['Irresistible Sweets Land', 'Space Invader World', 'Futuristic Endeavor Park', 'Furry Mammal Kingdom', 'Natural Disaster Harbor']
 
 destinationSuffix = [
     'Hotel',
