@@ -140,7 +140,7 @@ lastnames = [
     'Jones',
     'Rodriguez',
     'Miller',
-    'Perez'
+    'Perez',
     'Martinez'
 ]
 
