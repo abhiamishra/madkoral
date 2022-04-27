@@ -123,7 +123,7 @@ lastnames = [
     'Day',
     'Costello',
     'Yee',
-    'Coatney'
+    'Coatney',
     'Thai',
     'Vu',
     'Wood',
