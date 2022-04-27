@@ -5,7 +5,7 @@ use themepark;
 create table Department(
 	DeptID int not null auto_increment,
     DeptType varchar(300),
-    Supervisor varchar(300),
+    Supervisor int,
     primary key(DeptID)
 );
 
@@ -48,7 +48,7 @@ create table Shows(
 
 create table Destination(
 	destID int not null auto_increment,
-    managerID varchar(300),
+    managerID int,
     destName varchar(300),
     destType varchar(300),
     parkOwned boolean,
@@ -67,13 +67,13 @@ create table Attraction(
 
 create table Employee(
 	EMPID int not null auto_increment,
-    SSN int not null,
+    SSN bigint not null,
     division varchar(50),
     fname varchar(50) not null,
     lname varchar(50) not null,
     type varchar(20),
     age int,
-    phoneNo int,
+    phoneNo bigint,
     hours int,
     EmpDept int,
     primary key(EMPID)
@@ -81,13 +81,13 @@ create table Employee(
 
 create table Guest(
 	GID int not null auto_increment,
-    credCard int,
+    credCard bigint,
     address varchar(100),
     passType varchar(50),
     fname varchar(50) not null,
     lname varchar(50) not null,
     age int,
-    phoneNo int,
+    phoneNo bigint,
     primary key(GID)
 );
 
