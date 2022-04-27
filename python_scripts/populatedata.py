@@ -2,6 +2,26 @@ import mysql.connector
 import random
 import static
 
+# Global constants
+# If you want to change the number of rows being generated, change the value of the constant
+ADMINISTRATION_ROWS = 10
+ATTRACTION_ROWS = 10
+CHILD_ROWS = 10
+DEPARTMENT_ROWS = 10
+DESTINATION_ROWS = 10
+EMPLOYEE_ROWS = 10
+GUEST_ROWS = 10
+LEISURE_ROWS = 10
+RIDES_ROWS = 10
+RIDES_DEPT_ROWS = 10
+SECURITY_ROWS = 10
+SHOWS_ROWS = 10
+VISITS_ROWS = 10
+WATCHES_ROWS = 10
+WORKS_IN_ROWS = 10
+
+
+# generateAdministration generates rows for the administration table
 def generateAdministration(num_of_rows):
     stmt = """INSERT INTO administration (WPM) VALUES (%s)"""
     tuples = []
@@ -10,6 +30,8 @@ def generateAdministration(num_of_rows):
         tuples.append(thisTuple)
     return stmt, tuples
 
+
+# generateAttraction generates rows for the attraction table
 def generateAttraction(num_of_rows):
     stmt = """INSERT INTO attraction (attractionName, duration, passType, rideType, openHour, closeHour) VALUES (%s, %s, %s, %s, %s, %s)"""
     tuples = []
@@ -33,15 +55,26 @@ def generateAttraction(num_of_rows):
         tuples.append(thisTuple)
     return stmt, tuples
 
-# def generateChild(num_of_rows):
-#     stmt = """INSERT INTO child (GID, relationship, fname, lname, type, age, gender) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-#     tuples = []
-#     for i in range(num_of_rows):
-#         thisTuple = (
-#             random.randint(1,num_of_rows),
 
-#         )
+# generateChild generates rows for the child table
+def generateChild(num_of_rows):
+    stmt = """INSERT INTO child (GID, relationship, fname, lname, type, age, gender) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    tuples = []
+    for i in range(num_of_rows):
+        thisTuple = (
+            random.randint(1,GUEST_ROWS),
+            static.relationshipTypes[random.randint(0,3)],
+            static.firstnames[random.randint(0,12)],
+            static.lastnames[random.randint(0,12)],
+            "PLACEHOLDER - REMOVE",
+            random.randint(1,18),
+            static.gender[random.randint(0,1)]
+        )
+        tuples.append(thisTuple)
+    return stmt, tuples
 
+
+# commitInsert executes the statement alongside the generates tuples into the database
 def commitInsert(tableName = "NAN", insert_query = "", tuples_to_insert = []):
     if insert_query == "" and len(tuples_to_insert) == 0:
         return
@@ -65,10 +98,14 @@ def commitInsert(tableName = "NAN", insert_query = "", tuples_to_insert = []):
 if __name__ == "__main__":
 
     #  insert 10 tuples into the administration table
-    query, tuples = generateAdministration(10)
+    query, tuples = generateAdministration(ADMINISTRATION_ROWS)
     commitInsert("administration", query, tuples)
 
     #  insert 10 tuples into the attraction table
-    query, tuples = generateAttraction(10)
+    query, tuples = generateAttraction(ATTRACTION_ROWS)
     commitInsert("attraction", query, tuples)
+
+    #  insert 10 tuples into the child table
+    query, tuples = generateChild(CHILD_ROWS)
+    commitInsert("child", query, tuples)
 

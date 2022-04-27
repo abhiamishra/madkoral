@@ -2,6 +2,8 @@ passes = ['bronze', 'silver', 'gold', 'platinum']
 
 rideTypes = ['merry-go-round', 'rollercoaster', 'funhouse', 'ferris-wheel', 'pendulum ride']
 
+relationshipTypes = ['son', 'daughter', 'grandson', 'granddaughter']
+
 verbs = [
     'destroyer',
     'hunter',
@@ -45,3 +47,37 @@ tableNames = [
     'watches',
     'works_in'
 ]
+
+firstnames = [
+    'Abby',
+    'Lacey',
+    'Lucia',
+    'Anisa',
+    'Jessica',
+    'Annie',
+    'Kelly',
+    'Frank',
+    'Joseph',
+    'Saud',
+    'Michael',
+    'Jason',
+    'Arnav'
+]
+
+lastnames = [
+    'Iyer',
+    'Scott',
+    'Baker',
+    'Smith',
+    'Yang',
+    'Mishra',
+    'Nguyen',
+    'Holl',
+    'Subichev',
+    'Day',
+    'Costello',
+    'Yee',
+    'Coatney'
+]
+
+gender = ['m','f']
