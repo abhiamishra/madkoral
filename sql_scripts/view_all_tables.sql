@@ -16,3 +16,7 @@ select * from visits;
 select * from watches;
 select * from works_in;
 
+-- select attractionName as eventName, openHour, closeHour from attraction where park="Natural Disaster Harbor"
+-- union
+-- select title as eventName, openHour, closeHour from shows where park="Natural Disaster Harbor" order by openHour asc;
+

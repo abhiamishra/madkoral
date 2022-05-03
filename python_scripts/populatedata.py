@@ -4,30 +4,45 @@ import static
 
 # Global constants
 # If you want to change the number of rows being generated, change the value of the constant
-ADMINISTRATION_ROWS = 10
-ATTRACTION_ROWS = 10
-CHILD_ROWS = 10
-DEPARTMENT_ROWS = 10
-DESTINATION_ROWS = 10
-EMPLOYEE_ROWS = 10
-GUEST_ROWS = 10
-LEISURE_ROWS = 10
-RIDES_ROWS = 10
-RIDES_DEPT_ROWS = 10
-SECURITY_ROWS = 10
-SHOWS_ROWS = 10
-VISITS_ROWS = 10
-WATCHES_ROWS = 10
-WORKS_IN_ROWS = 10
+ADMINISTRATION_ROWS = 20
+ATTRACTION_ROWS = 20
+CHILD_ROWS = 20
+DEPARTMENT_ROWS = 20
+DESTINATION_ROWS = 20
+EMPLOYEE_ROWS = 20
+GUEST_ROWS = 20
+LEISURE_ROWS = 20
+OPERATES_ROWS = 20
+PERFORMS_ROWS = 20
+RIDES_ROWS = 20
+RIDES_DEPT_ROWS = 20
+SECURITY_ROWS = 20
+SHOWS_ROWS = 20
+VISITS_ROWS = 20
+WATCHES_ROWS = 20
+WORKS_IN_ROWS = 20
 
 used_names = set()
 
 # generateAdministration generates rows for the administration table
 def generateAdministration(num_of_rows):
-    stmt = """INSERT INTO administration (WPM) VALUES (%s)"""
+    if num_of_rows > DEPARTMENT_ROWS:
+        print("TOO MANY ROWS REQUESTED")
+        return
+    
+    stmt = """INSERT INTO administration (deptID, WPM) VALUES (%s, %s)"""
     tuples = []
+    chosenDept = set()
     for i in range(num_of_rows):
-        thisTuple = (random.randint(40,120),)
+        thisDept = random.randint(1,DEPARTMENT_ROWS)
+        while thisDept in chosenDept:
+            thisDept = random.randint(1,DEPARTMENT_ROWS)
+        chosenDept.add(thisDept)
+
+        thisTuple = (
+            thisDept,
+            random.randint(40,120)
+        )
         tuples.append(thisTuple)
     return stmt, tuples
 
@@ -140,13 +155,49 @@ def generateGuest(num_of_rows):
 
 
 def generateLeisure(num_of_rows):
-    stmt = """INSERT INTO leisure (hosp_index) VALUES (%s)"""
+    if num_of_rows > DEPARTMENT_ROWS:
+        print("TOO MANY ROWS REQUESTED")
+        return
+    
+    stmt = """INSERT INTO leisure (deptID, hosp_index) VALUES (%s, %s)"""
     tuples = []
+    chosenDept = set()
     for i in range(num_of_rows):
-        thisTuple = (random.randint(1,5),)
+        thisDept = random.randint(1,DEPARTMENT_ROWS)
+        while thisDept in chosenDept:
+            thisDept = random.randint(1,DEPARTMENT_ROWS)
+        chosenDept.add(thisDept)
+
+        thisTuple = (
+            thisDept,
+            random.randint(1,5)
+        )
         tuples.append(thisTuple)
     return stmt, tuples
 
+def generateOperatesIn(num_of_rows):
+    stmt = """INSERT INTO operates_in (oper_attrName, oper_EMPID) VALUES (%s, %s)"""
+    tuples= []
+    memo = {}
+    for i in range(num_of_rows):
+        thisTuple = (random.choice(list(used_names)), random.randint(1,EMPLOYEE_ROWS))
+        while thisTuple in memo:
+            thisTuple = (random.choice(list(used_names)), random.randint(1,EMPLOYEE_ROWS))
+        memo[thisTuple] = True
+        tuples.append(thisTuple)
+    return stmt, tuples
+
+def generatePerformsIn(num_of_rows):
+    stmt = """INSERT INTO performs_in (perf_EMPID, perf_showID) VALUES (%s, %s)"""
+    tuples = []
+    memo = {}
+    for i in range(num_of_rows):
+        thisTuple = (random.randint(1,EMPLOYEE_ROWS), random.randint(1,SHOWS_ROWS))
+        while thisTuple in memo:
+            thisTuple = (random.randint(1,EMPLOYEE_ROWS), random.randint(1,SHOWS_ROWS))
+        memo[thisTuple] = True
+        tuples.append(thisTuple)
+    return stmt, tuples
 
 def generateRides(num_of_rows):
     stmt = """INSERT INTO rides (rides_nameAttrac, rides_GID) VALUES (%s, %s)"""
@@ -168,12 +219,20 @@ def generateRides(num_of_rows):
 
 
 def generateRidesDept(num_of_rows):
-    stmt = """INSERT INTO rides_dept (showID, attractionName, skill_lvl) VALUES (%s, %s, %s)"""
+    if num_of_rows > DEPARTMENT_ROWS:
+        print("TOO MANY ROWS REQUESTED")
+        return
+
+    stmt = """INSERT INTO rides_dept (deptID, skill_lvl) VALUES (%s, %s)"""
     tuples = []
+    chosenDept = set()
     for i in range(num_of_rows):
+        thisDept = random.randint(1,DEPARTMENT_ROWS)
+        while thisDept in chosenDept:
+            thisDept = random.randint(1,DEPARTMENT_ROWS)
+        chosenDept.add(thisDept)
         thisTuple = (
-            random.randint(1,SHOWS_ROWS),
-            random.choice(list(used_names)),
+            thisDept,
             random.randint(1,10)
         )
         tuples.append(thisTuple)
@@ -181,10 +240,20 @@ def generateRidesDept(num_of_rows):
 
 
 def generateSecurity(num_of_rows):
-    stmt = """INSERT INTO security (physicalIndex) VALUES (%s)"""
+    if num_of_rows > DEPARTMENT_ROWS:
+        print("TOO MANY ROWS REQUESTED")
+        return
+    
+    stmt = """INSERT INTO security (deptID, physicalIndex) VALUES (%s, %s)"""
     tuples = []
+    chosenDept = set()
     for i in range(num_of_rows):
+        thisDept = random.randint(1,DEPARTMENT_ROWS)
+        while thisDept in chosenDept:
+            thisDept = random.randint(1,DEPARTMENT_ROWS)
+        chosenDept.add(thisDept)
         thisTuple = (
+            thisDept,
             random.randint(1,100),
         )
         tuples.append(thisTuple)
@@ -233,17 +302,16 @@ def generateWatches(num_of_rows):
 
 
 def generateWorksIn(num_of_rows):
-    stmt = """INSERT INTO works_in (work_destID, work_deptID) VALUES (%s, %s)"""
+    stmt = """INSERT INTO works_in (works_EMPID, works_destID) VALUES (%s, %s)"""
     tuples = []
     memo = {}
     for i in range(num_of_rows):
-        thisTuple = (random.randint(1,DESTINATION_ROWS), random.randint(1,DEPARTMENT_ROWS))
+        thisTuple = (random.randint(1,EMPLOYEE_ROWS), random.randint(1,DESTINATION_ROWS))
         while thisTuple in memo:
-            thisTuple = (random.randint(1,DESTINATION_ROWS), random.randint(1,DEPARTMENT_ROWS))
+            thisTuple = (random.randint(1,EMPLOYEE_ROWS), random.randint(1,DESTINATION_ROWS))
         memo[thisTuple] = True
         tuples.append(thisTuple)
     return stmt, tuples
-
 
 
 # commitInsert executes the statement alongside the generates tuples into the database
@@ -270,53 +338,73 @@ def commitInsert(tableName = "NAN", insert_query = "", tuples_to_insert = []):
 
 if __name__ == "__main__":
 
-    #  insert 10 tuples into the administration table
-    query, tuples = generateAdministration(ADMINISTRATION_ROWS)
-    commitInsert("administration", query, tuples)
-
-    #  insert 10 tuples into the attraction table
-    query, tuples = generateAttraction(ATTRACTION_ROWS)
-    commitInsert("attraction", query, tuples)
-
-    #  insert 10 tuples into the child table
-    query, tuples = generateChild(CHILD_ROWS)
-    commitInsert("child", query, tuples)
-
-    #  insert 10 tuples into the department table
     query, tuples = generateDepartment(DEPARTMENT_ROWS)
     commitInsert("department", query, tuples)
-
-    #  insert 10 tuples into the destination table
-    query, tuples = generateDestination(DESTINATION_ROWS)
-    commitInsert("destination", query, tuples)
-
+    
     query, tuples = generateEmployee(EMPLOYEE_ROWS)
     commitInsert("employee", query, tuples)
 
-    query, tuples = generateGuest(GUEST_ROWS)
-    commitInsert("guest", query, tuples)
 
-    query, tuples = generateLeisure(LEISURE_ROWS)
-    commitInsert("leisure", query, tuples)
-
-    query, tuples = generateRides(RIDES_ROWS)
-    commitInsert("rides", query, tuples)
-
+    # offshoot children for dept
     query, tuples = generateRidesDept(RIDES_DEPT_ROWS)
+    print(tuples)
     commitInsert("rides_dept", query, tuples)
-
+    
     query, tuples = generateSecurity(SECURITY_ROWS)
     commitInsert("security", query, tuples)
+    
+    query, tuples = generateLeisure(LEISURE_ROWS)
+    commitInsert("leisure", query, tuples)
+    
+    query, tuples = generateAdministration(ADMINISTRATION_ROWS)
+    commitInsert("administration", query, tuples)
+
 
     query, tuples = generateShows(SHOWS_ROWS)
     commitInsert("shows", query, tuples)
 
+    query, tuples = generateDestination(DESTINATION_ROWS)
+    commitInsert("destination", query, tuples)
+    
+    query, tuples = generateAttraction(ATTRACTION_ROWS)
+    commitInsert("attraction", query, tuples)
+
+    query, tuples = generateGuest(GUEST_ROWS)
+    commitInsert("guest", query, tuples)
+    
+    query, tuples = generateChild(CHILD_ROWS)
+    commitInsert("child", query, tuples)
+
+    # offshoot children for many
+    query, tuples = generateWatches(WATCHES_ROWS)
+    commitInsert("watches", query, tuples)
+    
     query, tuples = generateVisits(VISITS_ROWS)
     commitInsert("visits", query, tuples)
 
-    query, tuples = generateWatches(WATCHES_ROWS)
-    commitInsert("watches", query, tuples)
-
+    query, tuples = generateRides(RIDES_ROWS)
+    commitInsert("rides", query, tuples)
+    
     query, tuples = generateWorksIn(WORKS_IN_ROWS)
     commitInsert("works_in", query, tuples)
+
+    query, tuples = generatePerformsIn(PERFORMS_ROWS)
+    commitInsert("performs_in", query, tuples)
+
+    query, tuples = generateOperatesIn(OPERATES_ROWS)
+    commitInsert("operates_in", query, tuples)
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
