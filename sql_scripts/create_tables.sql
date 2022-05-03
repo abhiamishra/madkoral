@@ -11,31 +11,48 @@ create table Department(
     primary key(DeptID)
 );
 
+create table Employee(
+	EMPID int not null auto_increment,
+    SSN bigint not null,
+    fname varchar(50) not null,
+    lname varchar(50) not null,
+    type varchar(20),
+    age int,
+    phoneNo bigint,
+    hours int,
+    EmpDept int,
+    primary key(EMPID),
+    foreign key(EmpDept) references Department(DeptID)
+);
+
 create table Rides_Dept(
-	deptID int not null auto_increment,
-    showID int,
-    attractionName varchar(300),
+	deptID int not null,
     skill_lvl int,
-    primary key(deptID)
+    primary key(deptID),
+    foreign key(deptID) references Department(DeptID)
 );
 
 create table Security(
-	deptID int not null auto_increment,
+	deptID int not null,
     physicalIndex int,
-    primary key(deptID)
+    primary key(deptID),
+    foreign key(deptID) references Department(DeptID)
 );
 
 create table Leisure(
-	deptID int not null auto_increment,
+	deptID int not null,
     hosp_index int,
-    primary key(deptID)
+    primary key(deptID),
+    foreign key(deptID) references Department(DeptID)
 );
 
 create table Administration(
-	deptID int not null auto_increment,
+	deptID int not null,
     WPM int,
-    primary key(deptID)
+    primary key(deptID),
+    foreign key(deptID) references Department(DeptID)
 );
+
 
 -- show is a reserved word -- renamed to shows
 create table Shows(
@@ -68,19 +85,6 @@ create table Attraction(
     primary key(attractionName)
 );
 
-create table Employee(
-	EMPID int not null auto_increment,
-    SSN bigint not null,
-    fname varchar(50) not null,
-    lname varchar(50) not null,
-    type varchar(20),
-    age int,
-    phoneNo bigint,
-    hours int,
-    EmpDept int,
-    primary key(EMPID)
-);
-
 create table Guest(
 	GID int not null auto_increment,
     credCard bigint,
@@ -101,32 +105,59 @@ create table Child(
     lname varchar(50) not null,
     age int,
     gender varchar(1),
-    primary key(CID,GID)
-);
-
-create table works_in(
-	work_destID int,
-    work_deptID int,
-    primary key(work_destID, work_deptID)
+    primary key(CID,GID),
+    foreign key(GID) references Guest(GID)
 );
 
 create table watches(
 	watches_showID int,
     watches_GID int,
-    primary key(watches_showID, watches_GID)
+    primary key(watches_showID, watches_GID),
+    foreign key(watches_showID) references Shows(showID),
+    foreign key(watches_GID) references Guest(GID)
 );
 
 create table visits(
 	visits_destID int,
     visits_GID int,
-    primary key(visits_destID, visits_GID)
+    primary key(visits_destID, visits_GID),
+    foreign key(visits_destID) references Destination(destID),
+    foreign key(visits_GID) references Guest(GID)
 );
 
 create table rides(
 	rides_nameAttrac varchar(300),
     rides_GID int,
-    primary key(rides_nameAttrac, rides_GID)
+    primary key(rides_nameAttrac, rides_GID),
+    foreign key(rides_nameAttrac) references Attraction(attractionName),
+    foreign key(rides_GID) references Guest(GID)
 );
+
+create table works_in(
+	works_EMPID int,
+    works_destID int,
+    primary key(works_EMPID, works_destID),
+    foreign key(works_EMPID) references Employee(EMPID),
+    foreign key(works_destID) references Destination(destID)
+);
+
+create table performs_in(
+	perf_EMPID int,
+    perf_showID int,
+    primary key(perf_EMPID, perf_showID),
+    foreign key(perf_EMPID) references Employee(EMPID),
+    foreign key(perf_showID) references Shows(showID)
+);
+
+create table operates_in(
+	oper_attrName varchar(300),
+    oper_EMPID int,
+    primary key(oper_attrName, oper_EMPID),
+    foreign key(oper_attrName) references Attraction(attractionName),
+    foreign key(oper_EMPID) references Employee(EMPID)
+);
+
+
 
 
 
